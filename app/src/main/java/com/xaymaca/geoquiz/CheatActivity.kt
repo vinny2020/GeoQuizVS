@@ -3,6 +3,7 @@ package com.xaymaca.geoquiz
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
@@ -15,6 +16,7 @@ class CheatActivity : AppCompatActivity() {
 
     private lateinit var answerTextView: TextView
     private lateinit var showAnswerButton: Button
+    private lateinit var versionTextView: TextView
 
     private var answerIsTrue = false
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,6 +24,12 @@ class CheatActivity : AppCompatActivity() {
         setContentView(R.layout.activity_cheat)
         answerIsTrue = intent.getBooleanExtra(EXTRA_ANSWER_IS_TRUE, false )
         answerTextView = findViewById(R.id.answer_text_view)
+        versionTextView = findViewById(R.id.version_text_view)
+        val version = Build.VERSION.SDK_INT
+        //val versionMessage
+        versionTextView.text = resources.getString(R.string.api_level_text)
+        versionTextView.append(" ")
+        versionTextView.append(version.toString())
         showAnswerButton = findViewById(R.id.show_answer_button)
         showAnswerButton.setOnClickListener {
             val answerText = when {
